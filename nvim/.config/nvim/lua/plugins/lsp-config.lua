@@ -26,40 +26,29 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({
-				capabilities,
-			})
-			lspconfig.clangd.setup({
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            if capabilities.workspace then
+              capabilities.workspace.didChangeWatchedFiles = nil
+            end
+            vim.lsp.config('*', {
+              capabilities = capabilities,
+            })
+            vim.lsp.enable('clangd')
+            vim.lsp.enable('neocmake')
+            vim.lsp.enable('dockerls')
+            vim.lsp.enable('jsonls')
+            vim.lsp.enable('marksman')
+            vim.lsp.enable('pyright')
+            vim.lsp.enable('lemminx')
+            vim.lsp.enable('yamlls')
+			vim.lsp.config['clangd'] = {
 				capabilities,
 				cmd = {
 					"clangd",
 					"--offset-encoding=utf-16",
 					"--clang-tidy",
 				},
-			})
-			lspconfig.neocmake.setup({
-				capabilities,
-			})
-			lspconfig.dockerls.setup({
-				capabilities,
-			})
-			lspconfig.jsonls.setup({
-				capabilities,
-			})
-			lspconfig.marksman.setup({
-				capabilities,
-			})
-			lspconfig.pyright.setup({
-				capabilities,
-			})
-			lspconfig.lemminx.setup({
-				capabilities,
-			})
-			lspconfig.yamlls.setup({
-				capabilities,
-			})
+			}
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})

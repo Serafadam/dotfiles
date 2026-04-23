@@ -27,10 +27,8 @@ apt-get update \
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
-pip3 install cppcheck
-
 cd  /usr/local/bin/ && \
-wget https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.tar.gz && \
+wget https://github.com/neovim/neovim/releases/download/v0.12.1/nvim-linux-x86_64.tar.gz && \
 tar zxfv nvim-linux-x86_64.tar.gz && \
 rm -rf nvim-linux-x86_64.tar.gz && \
 ln -sf /usr/local/bin/nvim-linux-x86_64/bin/nvim /usr/local/bin/
@@ -42,7 +40,5 @@ install lazygit /usr/local/bin
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-nvm install 18 && nvm use 18
 
 export DEBIAN_FRONTEND=dialog && sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
