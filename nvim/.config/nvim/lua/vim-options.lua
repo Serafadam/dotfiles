@@ -32,5 +32,4 @@ vim.keymap.set("n", "<C-l>", ":wincmd l<CR>")
 vim.keymap.set("n", "<leader>bn", ":bnext<CR>")
 vim.keymap.set("n", "<leader>bp", ":bprev<CR>")
 vim.keymap.set("n", "<leader>bcc", ":bdelete<CR>")
-vim.keymap.set("n", "<leader>sf", ":write<CR>", { desc = "Save file" })
 
