@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 apt-get update \
    && apt-get -y install --no-install-recommends software-properties-common \
    ssh \
@@ -6,6 +7,7 @@ apt-get update \
    git \
    ripgrep \
    fd-find \
+   golang \
    clang-format \
    clangd \
    clang-tidy \
@@ -23,10 +25,11 @@ apt-get update \
    tmux \
    htop \
    iputils-ping\
+   lsd \
    python3-pip
 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-
+curl -LsSf https://astral.sh/uv/install.sh | sh
 cd  /usr/local/bin/ && \
 wget https://github.com/neovim/neovim/releases/download/v0.12.1/nvim-linux-x86_64.tar.gz && \
 tar zxfv nvim-linux-x86_64.tar.gz && \
@@ -41,4 +44,12 @@ install lazygit /usr/local/bin
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 
+add-apt-repository ppa:zhangsongcui3371/fastfetch
+apt update && apt install fastfetch
+# regular install won't work in this environment for some reason
+git clone https://github.com/junegunn/fzf.git /tmp/.fzf
+cd /tmp/.fzf && make install && ./install --all
+rm -rf /tmp/.fzf
 export DEBIAN_FRONTEND=dialog && sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+cd /tmp && git clone https://gitlab.com/phoneybadger/pokemon-colorscripts.git
+cd pokemon-colorscripts && sudo ./install.sh
