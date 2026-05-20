@@ -28,8 +28,10 @@ apt-get update \
    lsd \
    python3-pip
 
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-curl -LsSf https://astral.sh/uv/install.sh | sh
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+pip3 install uv --break-system-packages
+
 cd  /usr/local/bin/ && \
 wget https://github.com/neovim/neovim/releases/download/v0.12.1/nvim-linux-x86_64.tar.gz && \
 tar zxfv nvim-linux-x86_64.tar.gz && \

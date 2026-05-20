@@ -2,13 +2,19 @@ ARG ROS_DISTRO=jazzy
 FROM docker.io/library/ros:${ROS_DISTRO}-ros-base
 ARG DOCKER_USER=test_user
 ENV DEBIAN_FRONTEND=noninteractive
+ENV UV_SYSTEM_PYTHON=1
+ENV RUSTUP_HOME=/opt/rust
+ENV CARGO_HOME=/opt/rust
+ENV NVM_DIR=/opt/.nvm
+ENV PATH="/opt/rust/bin:${PATH}"
 
+RUN mkdir -p /opt/rust && \
+    chmod -R 777 /opt/rust
 WORKDIR /ws
 COPY ./install.sh /ws/install.sh 
 
 RUN sh /ws/install.sh
 COPY ./nvm_install.sh /ws/nvm_install.sh
-RUN echo ${DOCKER_USER}
-RUN usermod -l ${DOCKER_USER} ubuntu
 
 RUN sh /ws/nvm_install.sh
+RUN usermod -l ${DOCKER_USER} ubuntu
