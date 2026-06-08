@@ -1,4 +1,5 @@
 vim.opt.termguicolors = true
+vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
 vim.cmd("set tabstop=4")
 vim.cmd("set softtabstop=4")
 vim.cmd("set shiftwidth=4")
@@ -32,4 +33,22 @@ vim.keymap.set("n", "<C-l>", ":wincmd l<CR>")
 vim.keymap.set("n", "<leader>bn", ":bnext<CR>")
 vim.keymap.set("n", "<leader>bp", ":bprev<CR>")
 vim.keymap.set("n", "<leader>bcc", ":bdelete<CR>")
+vim.keymap.set("n", "<Leader>ds", vim.diagnostic.open_float, { desc = "Show diagnostic" })
+	
+vim.lsp.handlers["$/progress"] = function() end
 
+vim.diagnostic.config({
+  virtual_text = true,  -- show inline messages
+  signs = true,         -- show signs in the gutter
+  underline = true,     -- underline problematic text
+  update_in_insert = false, -- don't update diagnostics while typing
+  severity_sort = true,     -- sort diagnostics by severity
+})
+vim.api.nvim_create_autocmd('FileType', { 
+callback = function() 
+  -- Enable treesitter highlighting and disable regex syntax
+  pcall(vim.treesitter.start) 
+  -- Enable treesitter-based indentation
+  vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()" 
+end, 
+})

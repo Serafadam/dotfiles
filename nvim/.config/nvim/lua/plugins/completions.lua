@@ -110,7 +110,6 @@ return {
                     ["<A-y>"] = require('minuet').make_cmp_map()
                 }),
                 sources = cmp.config.sources({
-                    { name = 'minuet' },
                     { name = "nvim_lsp" },
                     -- { name = "vsnip" }, -- For vsnip users.
                     { name = "luasnip" },
