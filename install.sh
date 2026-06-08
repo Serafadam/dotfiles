@@ -49,9 +49,8 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 add-apt-repository ppa:zhangsongcui3371/fastfetch
 apt update && apt install fastfetch
 # regular install won't work in this environment for some reason
-git clone https://github.com/junegunn/fzf.git /tmp/.fzf
-cd /tmp/.fzf && make install && ./install --all
-rm -rf /tmp/.fzf
+git clone https://github.com/junegunn/fzf.git /opt/.fzf
+cd /opt/.fzf && PREFIX=/fzf make install && ./install --all
 export DEBIAN_FRONTEND=dialog && sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 cd /tmp && git clone https://gitlab.com/phoneybadger/pokemon-colorscripts.git
-cd pokemon-colorscripts && sudo ./install.sh
+cd pokemon-colorscripts && ./install.sh
